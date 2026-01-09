@@ -27,7 +27,7 @@ function formatPrice(v, c) {
 async function fetchStock(ticker, range = '1d', interval = '1d') {
   try {
     const res = await fetch(
-      `/.netlify/functions/yahoo?ticker=${ticker}&range=${range}&interval=${interval}`
+      '/yahoo?ticker=${ticker}&range=${range}&interval=${interval}'
     );
     const data = await res.json();
     return data.chart.result[0];
@@ -125,5 +125,6 @@ searchInput.addEventListener('input', e => {
   );
   render(filtered);
 });
+
 
 loadStocks();
