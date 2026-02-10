@@ -1,0 +1,29 @@
+# Variáveis de ambiente (NUNCA commitar)
+.env
+.env.local
+.env.production
+.env.development
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cloudflare
+.wrangler/
+wrangler.toml
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
