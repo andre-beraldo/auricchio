@@ -1,0 +1,48 @@
+# Dependências
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ambiente
+.env
+.env.local
+.env.production
+.env.*.local
+
+# API Keys (NUNCA commitar!)
+*.key
+*.pem
+secrets.json
+
+# Cache e build
+.cache/
+dist/
+build/
+.output/
+.vercel/
+.netlify/
+
+# Cloudflare
+.wrangler/
+wrangler.toml  # Se tiver API keys
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# Sistema
+Thumbs.db
+Desktop.ini
+
+# Temporários
+*.tmp
+*.temp
