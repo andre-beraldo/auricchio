@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auricchio - Monitor de Ações</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .choice-card {
+      background: rgba(30, 41, 59, 0.6);
+      border: 2px solid rgba(148, 163, 184, 0.15);
+      border-radius: 20px;
+      padding: 36px 28px;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .choice-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+    }
+
+    .choice-card.card-1:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.08); }
+    .choice-card.card-2:hover { border-color: #10b981; background: rgba(16, 185, 129, 0.08); }
+
+    .card-icon { font-size: 2.8rem; line-height: 1; }
+
+    .card-title { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.02em; }
+    .card-1 .card-title { color: #3b82f6; }
+    .card-2 .card-title { color: #10b981; }
+
+    .card-desc { font-size: 0.82rem; color: #94a3b8; line-height: 1.6; }
+
+    .card-tag {
+      font-size: 0.7rem; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .card-1 .card-tag { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+    .card-2 .card-tag { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+
+    .card-divider { width: 40px; height: 2px; border-radius: 2px; }
+    .card-1 .card-divider { background: rgba(59, 130, 246, 0.3); }
+    .card-2 .card-divider { background: rgba(16, 185, 129, 0.3); }
+
+    .footer-note {
+      margin-top: 40px;
+      font-size: 0.72rem;
+      color: #475569;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 520px) {
+      h1 { font-size: 1.8rem; }
+      .cards { grid-template-columns: 1fr; max-width: 340px; }
+      .choice-card { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🎯 Auricchio</h1>
+    <p class="subtitle">Monitor de Ações em Tempo Real</p>
+  </header>
+
+  <div class="cards">
+
+    <a href="auricchio1.html" class="choice-card card-1">
+      <span class="card-icon">📊</span>
+      <div class="card-divider"></div>
+      <div class="card-title">Auricchio</div>
+      <div class="card-desc">
+        Radar de descontos pronto para usar. Leve, Moderado e Forte — sem configuração.
+      </div>
+      <span class="card-tag">Modo Padrão</span>
+    </a>
+
+    <a href="auricchio2/auricchio2.html" class="choice-card card-2">
+      <span class="card-icon">⚙️</span>
+      <div class="card-divider"></div>
+      <div class="card-title">Auricchio 2</div>
+      <div class="card-desc">
+        Monte seus próprios critérios. Três setups personalizáveis com score de aderência.
+      </div>
+      <span class="card-tag">Modo Avançado</span>
+    </a>
+
+  </div>
+
+  <p class="footer-note">
+    Este aplicativo é uma ferramenta de informação.<br>
+    Não constitui recomendação de investimento.
+  </p>
+
+</body>
+</html>
