@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auricchio - Bem-vindo</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .onboarding {
+      width: 100%;
+      max-width: 420px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* SLIDES */
+    .slides-wrapper {
+      width: 100%;
+      overflow: hidden;
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide {
+      width: 33.333%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 4px;
+      min-height: 420px;
+      justify-content: center;
+    }
+
+    /* ÍCONE */
+    .icon-wrap {
+      width: 80px; height: 80px;
+      border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 32px;
+      flex-shrink: 0;
+    }
+    .icon-blue   { background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.2); }
+    .icon-yellow { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.2); }
+    .icon-red    { background: rgba(239,68,68,0.12);  border: 1px solid rgba(239,68,68,0.2);  }
+
+    /* TEXTOS */
+    .slide-title {
+      font-size: 1.3rem; font-weight: 700;
+      color: #e2e8f0; text-align: center;
+      margin-bottom: 16px; line-height: 1.35;
+    }
+    .slide-text {
+      font-size: 0.88rem; color: #64748b;
+      text-align: center; line-height: 1.8;
+    }
+    .slide-text strong { color: #94a3b8; }
+
+    /* NÍVEIS — slide 2 */
+    .levels {
+      width: 100%;
+      display: flex; flex-direction: column; gap: 10px;
+      margin: 24px 0 16px;
+    }
+    .level-row {
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(30,41,59,0.6);
+      border-radius: 12px; padding: 12px 16px;
+      border: 1px solid rgba(148,163,184,0.08);
+    }
+    .level-dot  { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .level-name { font-size: 0.82rem; font-weight: 600; color: #94a3b8; flex: 1; }
+    .level-pct  { font-size: 0.76rem; font-weight: 700; }
+
+    .level-hint {
+      font-size: 0.72rem; color: #334155;
+      text-align: center; line-height: 1.6;
+    }
+
+    /* DISCLAIMER — slide 3 */
+    .disclaimer-box {
+      width: 100%;
+      background: rgba(239,68,68,0.05);
+      border: 1px solid rgba(239,68,68,0.15);
+      border-radius: 14px; padding: 18px;
+      margin-top: 20px;
+    }
+    .disclaimer-box p {
+      font-size: 0.82rem; color: #94a3b8;
+      line-height: 1.8; text-align: center;
+    }
+    .disclaimer-box strong { color: #f87171; }
+
+    /* NAVEGAÇÃO */
+    .nav-bar {
+      width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 36px;
+      flex-shrink: 0;
+    }
+
+    .nav-arrow {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; cursor: pointer;
+      border: 1.5px solid rgba(148,163,184,0.15);
+      background: rgba(30,41,59,0.5);
+      color: #3b82f6;
+      transition: all 0.2s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .nav-arrow:hover { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+    .nav-arrow:active { transform: scale(0.94); }
+    .nav-arrow.off { opacity: 0; pointer-events: none; }
+
+    .nav-dots { display: flex; gap: 8px; align-items: center; }
+    .nav-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(148,163,184,0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .nav-dot.active {
+      background: #3b82f6;
+      width: 22px; border-radius: 4px;
+    }
+
+    /* BOTÃO ACEITE */
+    .btn-accept {
+      width: 100%; padding: 15px;
+      border-radius: 14px; border: none;
+      font-size: 0.95rem; font-weight: 700;
+      cursor: pointer;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: white;
+      box-shadow: 0 4px 24px rgba(16,185,129,0.3);
+      transition: all 0.2s;
+      margin-top: 20px;
+      display: none; /* aparece só no slide 3 */
+      letter-spacing: 0.03em;
+    }
+    .btn-accept:hover  { transform: translateY(-1px); box-shadow: 0 6px 28px rgba(16,185,129,0.4); }
+    .btn-accept:active { transform: translateY(0); }
+    .btn-accept.visible { display: block; }
+
+    /* SWIPE no mobile */
+    .slides-wrapper {
+      touch-action: pan-y;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="onboarding">
+
+    <div class="slides-wrapper" id="slidesWrapper">
+      <div class="slides" id="slides">
+
+        <!-- ═══════════════════════════
+             SLIDE 1 — COMO FUNCIONA
+             Para alterar: mude o emoji em .icon-wrap,
+             o texto em .slide-title e .slide-text
+        ═══════════════════════════ -->
+        <div class="slide">
+          <div class="icon-wrap icon-blue">📊</div> <!-- ÍCONE SLIDE 1 -->
+          <div class="slide-title">Como o Auricchio funciona</div> <!-- TÍTULO SLIDE 1 -->
+          <div class="slide-text"> <!-- TEXTO SLIDE 1 -->
+            O app compara o <strong>preço atual</strong> de cada ação com a sua
+            <strong>média histórica</strong> e identifica quais estão sendo
+            negociadas abaixo dessa média — ou seja, em desconto.
+            <br><br>
+            Quanto maior o desconto em relação à média, maior o potencial
+            de valorização histórica da ação.
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════
+             SLIDE 2 — CONFIGURAÇÃO PADRÃO
+             Para alterar: mude o emoji em .icon-wrap,
+             o texto em .slide-title e .slide-text,
+             e os nomes/percentuais em .level-row
+        ═══════════════════════════ -->
+        <div class="slide">
+          <div class="icon-wrap icon-yellow">⚙️</div> <!-- ÍCONE SLIDE 2 -->
+          <div class="slide-title">Já vem configurado</div> <!-- TÍTULO SLIDE 2 -->
+          <div class="slide-text"> <!-- TEXTO SLIDE 2 -->
+            O app usa <strong>média de 3 anos</strong> e 3 níveis de desconto
+            pré-definidos. Você pode personalizar tudo como quiser.
+          </div>
+
+          <div class="levels">
+            <!-- NÍVEL 1 — altere o nome e o percentual -->
+            <div class="level-row">
+              <div class="level-dot" style="background:#3b82f6"></div>
+              <div class="level-name">Desconto Leve</div>
+              <div class="level-pct" style="color:#3b82f6">a partir de 8,3%</div>
+            </div>
+            <!-- NÍVEL 2 — altere o nome e o percentual -->
+            <div class="level-row">
+              <div class="level-dot" style="background:#f59e0b"></div>
+              <div class="level-name">Desconto Moderado</div>
+              <div class="level-pct" style="color:#f59e0b">a partir de 16,6%</div>
+            </div>
+            <!-- NÍVEL 3 — altere o nome -->
+            <div class="level-row">
+              <div class="level-dot" style="background:#ef4444"></div>
+              <div class="level-name">Desconto Forte</div>
+              <div class="level-pct" style="color:#ef4444">acima de 16,6%</div>
+            </div>
+          </div>
+
+          <div class="level-hint"> <!-- DICA ABAIXO DOS NÍVEIS — altere se quiser -->
+            Renomeie, ajuste os percentuais ou remova níveis<br>
+            em <strong style="color:#475569">⚙️ Personalizar descontos</strong>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════
+             SLIDE 3 — DISCLAIMER
+             Para alterar: mude o emoji em .icon-wrap,
+             o texto em .slide-title, .slide-text
+             e o conteúdo de .disclaimer-box
+        ═══════════════════════════ -->
+        <div class="slide">
+          <div class="icon-wrap icon-red">⚠️</div> <!-- ÍCONE SLIDE 3 -->
+          <div class="slide-title">Aviso importante</div> <!-- TÍTULO SLIDE 3 -->
+          <div class="slide-text">Leia antes de usar o app.</div> <!-- SUBTÍTULO SLIDE 3 -->
+
+          <div class="disclaimer-box"> <!-- TEXTO DO DISCLAIMER — altere aqui -->
+            <p>
+              Os dados exibidos são <strong>exclusivamente informativos</strong>
+              e baseados em médias históricas de preço.
+              <br><br>
+              <strong>Nada aqui constitui recomendação de investimento.</strong>
+              <br><br>
+              Os critérios de desconto são definidos pelo próprio usuário.
+              Sempre faça sua própria análise antes de tomar qualquer
+              decisão financeira.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NAVEGAÇÃO -->
+    <div class="nav-bar">
+      <div class="nav-arrow off" id="btnPrev" onclick="goTo(current - 1)">←</div>
+      <div class="nav-dots">
+        <div class="nav-dot active" onclick="goTo(0)"></div>
+        <div class="nav-dot" onclick="goTo(1)"></div>
+        <div class="nav-dot" onclick="goTo(2)"></div>
+      </div>
+      <div class="nav-arrow" id="btnNext" onclick="goTo(current + 1)">→</div>
+    </div>
+
+    <!-- BOTÃO ACEITE — só aparece no slide 3 -->
+    <!-- Para alterar o texto do botão, mude aqui -->
+    <button class="btn-accept" id="btnAccept" onclick="aceitar()">
+      ✓ &nbsp;Entendi e aceito
+    </button>
+
+  </div>
+
+  <script>
+    let current = 0;
+    const total = 3;
+
+    // Swipe no mobile
+    let touchStartX = 0;
+    const wrapper = document.getElementById('slidesWrapper');
+    wrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    wrapper.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
+    });
+
+    function goTo(index) {
+      if (index < 0 || index >= total) return;
+      current = index;
+
+      // Move slides
+      document.getElementById('slides').style.transform = `translateX(-${current * 33.333}%)`;
+
+      // Atualiza dots
+      document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+      });
+
+      // Setas
+      document.getElementById('btnPrev').classList.toggle('off', current === 0);
+      document.getElementById('btnNext').classList.toggle('off', current === total - 1);
+
+      // Botão aceite
+      document.getElementById('btnAccept').classList.toggle('visible', current === total - 1);
+    }
+
+    function aceitar() {
+      // Marca onboarding como visto
+      localStorage.setItem('auricchio_onboarding', 'done');
+      // Redireciona para o app principal
+      window.location.href = 'index.html';
+    }
+
+    // Se já viu o onboarding, vai direto pro app
+    if (localStorage.getItem('auricchio_onboarding') === 'done') {
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
